@@ -10,47 +10,62 @@
             margin: 0;
             padding: 0;
             background-color: #f4f4f4;
-            background-image: url('https://www.transparenttextures.com/patterns/hearts.png'); /* Heart pattern background */
-            background-size: 400px 400px; /* Adjust the size of the hearts */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
         }
+
         header {
             background-color: #e91e63;
             color: #fff;
             padding: 1em 0;
             text-align: center;
+            position: relative;
+            z-index: 10; /* Ensure the header is above the hearts */
         }
+
         nav {
             margin: 0;
             padding: 1em;
             background: #f8bbd0;
             text-align: center;
+            position: relative;
+            z-index: 10; /* Ensure the nav is above the hearts */
         }
+
         nav a {
             margin: 0 1em;
             text-decoration: none;
             color: #e91e63;
         }
+
         main {
             padding: 2em;
-            background-color: rgba(255, 255, 255, 0.9); /* Slight white background for readability */
+            background-color: rgba(255, 255, 255, 0.9);
             margin: 1em;
             border-radius: 10px;
+            position: relative;
+            z-index: 10; /* Ensure the main content is above the hearts */
         }
+
         footer {
             text-align: center;
             padding: 1em;
             background: #e91e63;
             color: #fff;
+            position: relative;
+            z-index: 10; /* Ensure the footer is above the hearts */
         }
+
         .section {
             margin-bottom: 2em;
         }
+
         form {
             background-color: #fff;
             padding: 1em;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         input, textarea, button {
             width: 100%;
             padding: 0.5em;
@@ -58,15 +73,18 @@
             border-radius: 5px;
             border: 1px solid #ccc;
         }
+
         button {
             background-color: #e91e63;
             color: #fff;
             border: none;
             cursor: pointer;
         }
+
         button:hover {
             background-color: #d81b60;
         }
+
         .team-member {
             margin: 1em 0;
             padding: 1em;
@@ -74,9 +92,39 @@
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
+        .heart {
+            position: absolute;
+            color: rgba(255, 0, 0, 0.8);
+            font-size: 24px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0; /* Ensure the background is below all content */
+        }
     </style>
 </head>
 <body>
+    <div class="background" id="background"></div>
+
     <header>
         <h1>SawiSaPagIbig</h1>
         <p>Your partner in resolving relationship issues</p>
@@ -141,5 +189,36 @@
     <footer>
         <p>&copy; 2024 SawiSaPagIbig. All rights reserved.</p>
     </footer>
+
+    <script>
+        function createBackgroundHearts() {
+            const background = document.getElementById('background');
+            for (let i = 0; i < 100; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.top = `${Math.random() * 100}%`;
+                heart.style.fontSize = `${Math.random() * 50 + 10}px`; // Random heart sizes
+                background.appendChild(heart);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', createBackgroundHearts);
+
+        document.addEventListener('click', function(e) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = `${e.pageX - 12}px`; // Adjust position for better centering
+            heart.style.top = `${e.pageY - 12}px`; // Adjust position for better centering
+            heart.style.fontSize = '24px'; // Fixed size for click hearts
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        });
+    </script>
 </body>
 </html>
