@@ -120,6 +120,50 @@
             overflow: hidden;
             z-index: 0; /* Ensure the background is below all content */
         }
+
+        /* Popup styles */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 500px;
+            padding: 2em;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            z-index: 100; /* Ensure the popup is above all content */
+            display: none; /* Hidden by default */
+        }
+
+        .popup h2 {
+            margin-top: 0;
+        }
+
+        .popup button {
+            background-color: #e91e63;
+            color: #fff;
+            border: none;
+            padding: 0.5em 1em;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .popup button:hover {
+            background-color: #d81b60;
+        }
+
+        .popup .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -158,17 +202,17 @@
         <section id="chat-groups" class="section">
             <h2>Join Our Chat Groups</h2>
             <p>Connect with others who are going through similar experiences. Join our chat groups to share your story and get advice from peers.</p>
-            <button onclick="alert('Chat Group feature coming soon!')">Join Chat Group</button>
+            <button onclick="window.open('https://m.me/j/AbZWxEe09C112Ee8/', '_blank')">Join Chat Group</button>
         </section>
         <section id="forums" class="section">
             <h2>Forums</h2>
             <p>Participate in our forums to discuss various relationship topics. Ask questions, share your experiences, and learn from others.</p>
-            <button onclick="alert('Forums feature coming soon!')">Visit Forums</button>
+            <button onclick="window.open('https://m.me/j/AbZWxEe09C112Ee8/', '_blank')">Visit Forums</button>
         </section>
         <section id="seminars" class="section">
             <h2>Upcoming Seminars</h2>
             <p>Attend our seminars to learn about relationship problems and solutions. Our experts provide insights and practical advice to help you navigate your relationship issues.</p>
-            <button onclick="alert('Seminars feature coming soon!')">View Seminar Schedule</button>
+            <button onclick="showPopup()">View Seminar Schedule</button>
         </section>
         <section id="team" class="section">
             <h2>Meet Our Team</h2>
@@ -189,6 +233,14 @@
     <footer>
         <p>&copy; 2024 SawiSaPagIbig. All rights reserved.</p>
     </footer>
+
+    <div class="popup" id="popup">
+        <button class="close-btn" onclick="hidePopup()">×</button>
+        <h2>Upcoming Seminars</h2>
+        <p>June 10 to June 13, 12 AM to 7 PM</p>
+        <p>Location: Sumulong College of Arts and Sciences</p>
+        <button onclick="hidePopup()">Close</button>
+    </div>
 
     <script>
         function createBackgroundHearts() {
@@ -219,6 +271,14 @@
                 heart.remove();
             }, 3000);
         });
+
+        function showPopup() {
+            document.getElementById('popup').style.display = 'block';
+        }
+
+        function hidePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
     </script>
 </body>
 </html>
